@@ -2,20 +2,27 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Page not found</title>
   <script>
     window.onload = function() {
-      const oldBase = "yalter.github.io/test-old";
-      const newBase = "yalter.github.io/niri";
-      
-      if (window.location.href.includes(oldBase)) {
-        const newUrl = window.location.href.replace(oldBase, newBase);
-        window.location.href = newUrl;
+      const pathname = window.location.pathname;      
+
+      // Make sure we don't redirect on something like /niri-unrelated
+      if (pathname === "/test-old" || pathname.startsWith("/test-old/")) {
+        const newUrl = window.location.href.replace("yalter.github.io/test-old", "yalter.github.io/niri");
+        window.location.replace(newUrl);
+        document.getElementById("body").innerHTML = `<h1>Moving...</h1><p>The page has moved, redirecting to <a href="${newUrl}">${newUrl}</a></p>`;
       }
     };
   </script>
 </head>
-<body>
+<style>
+  :root {
+    color-scheme: light dark;
+  }
+</style>
+<body id="body">
   <h1>404</h1>
   <p>The page you're looking for does not exist.</p>
 </body>
