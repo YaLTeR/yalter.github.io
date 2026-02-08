@@ -6,11 +6,14 @@
   <title>Page not found</title>
   <script>
     window.onload = function() {
+      const oldBase = "yalter.github.io";
+      const newBase = "niri-wm.github.io";
+      const hostname = window.location.hostname;
       const pathname = window.location.pathname;      
 
       // Make sure we don't redirect on something like /niri-unrelated
-      if (pathname === "/test-old" || pathname.startsWith("/test-old/")) {
-        const newUrl = window.location.href.replace("yalter.github.io/test-old", "yalter.github.io/niri");
+      if (hostname === oldBase && (pathname === "/niri" || pathname.startsWith("/niri/"))) {
+        const newUrl = window.location.href.replace(oldBase, newBase);
         window.location.replace(newUrl);
         document.getElementById("body").innerHTML = `<h1>Moving...</h1><p>The page has moved, redirecting to <a href="${newUrl}">${newUrl}</a></p>`;
       }
